@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Exemplo de consumo de API</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <div id="user-info"></div>
+  
+  <script>
+    // Define o nome do usuário que será buscado na API
+    const username = "Kay-Dassie";
+
+    // Faz a requisição à API do GitHub
+    fetch(`https://api.github.com/users/${username}`)
+      .then(response => response.json()) // Converte a resposta em JSON
+      .then(data => {
+        // Exibe as informações do usuário na página
+        const userInfo = document.getElementById("user-info");
+        userInfo.innerHTML = `
+          <h2>${data.name}</h2>
+          <img src="${data.avatar_url}" alt="Foto de perfil do usuário">
+          <p>Seguidores: ${data.followers}</p>
+          <p>Repositórios públicos: ${data.public_repos}</p>
+        `;
+      })
+      .catch(error => console.error(error)); // Trata erros na requisição
+  </script>
+</body>
+</html>
+
+
+
+
